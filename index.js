@@ -3,7 +3,8 @@ let currentID = 0;
 
 const reqInfo = () => {fetch("http://localhost:3000/",{
   method: 'get',
-  headers: {'Content-Type':  'application/json'}
+  headers: {'Content-Type':  'application/json'},
+  credentials: 'include'
 })
   .then(response => response.json())
   .then(data => {
@@ -12,7 +13,8 @@ const reqInfo = () => {fetch("http://localhost:3000/",{
       $('#login').show();
     } else
     {
-      alert('workde')
+      $('.main').show();
+      alert('workde');
       const data = response.json();
       original = data;
       data.sort((a, b) => (a.question_id > b.question_id) ? 1 : -1);
