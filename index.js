@@ -176,49 +176,5 @@ $(".edit").click(() => {
 })
 
 $('#google').click(() => {
-  fetch('http://localhost:3000/auth/google', {
-    method: 'get',
-    redirect: 'follow',
-    headers: {'Content-Type':  'application/json','cookie' : '{cookie}'},
-    mode: 'cors',
-    credentials: 'include'
-  })
-  .then(response => {console.log(response);return response.json()})
-  .then(data => {
-    console.log(data);
-    if (data === 'Authentication required') {
-      $('.placeholder').hide();
-      $('#login').show();
-    } else
-    {
-      const data = response.json();
-      original = data;
-      data.sort((a, b) => (a.question_id > b.question_id) ? 1 : -1);
-      data.reverse().forEach((question,i) => {
-          $(".question-list").prepend(`
-          <div class="question-item" id="${question.question_id}">
-            <p class="item-heading">Câu hỏi ${data.length-i}</p>
-            <p class="item-question">${question.cau_hoi}</p>
-          </div>`);
-          $('#'+question.question_id).click(() => {
-            currentID = question.question_id;
-            $(".placeholder").hide();
-            $(".main").show();
-            $(".title").text("Câu hỏi " + String(data.length-i));
-            $("#cau-hoi").val(question.cau_hoi);
-            $("#cau-tra-loi").val(question.cau_tra_loi);
-            $("#phan-thi").val(question.phan_thi);
-            if ($(".create").is(":visible")) {
-              $(".create").hide();
-            }
-            if ($(".discard").is(":visible")) {
-              $(".discard").hide();
-            }
-            $(".edit").show();
-            $(".edit").attr("class","button edit deactivated");
-            $(".delete").show();
-          })
-      })
-    }
-  })
+  window.location.replace('http://localhost:3000/auth/google')
 })
