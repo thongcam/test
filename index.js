@@ -178,7 +178,9 @@ $(".edit").click(() => {
 $('#google').click(() => {
   fetch('http://localhost:3000/auth/google', {
     method: 'get',
-    headers: {'Content-Type':  'application/json'}
+    headers: {'Content-Type':  'application/json'},
+    mode: 'cors',
+    credentials: 'include'
   })
   .then(response => {console.log(response);return response.json()})
   .then(data => {
