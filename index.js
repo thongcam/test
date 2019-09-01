@@ -13,8 +13,6 @@ const reqInfo = () => {fetch("http://localhost:3000/",{
       $('#login').show();
     } else
     {
-      $('.main').show();
-      alert('workde');
       const data = response.json();
       original = data;
       data.sort((a, b) => (a.question_id > b.question_id) ? 1 : -1);
