@@ -8,11 +8,7 @@ const reqInfo = () => {fetch("http://localhost:3000/",{
 })
   .then(response => response.json())
   .then(data => {
-    if (data === 'Authentication required') {
-      $('.placeholder').hide();
-      $('#login').show();
-    } else
-    {
+    if (data !== 'Authentication required') {
       $('.placeholder').show();
       original = data;
       data.sort((a, b) => (a.question_id > b.question_id) ? 1 : -1);
@@ -41,8 +37,11 @@ const reqInfo = () => {fetch("http://localhost:3000/",{
             $(".delete").show();
           })
       })
+    } else {
+      window.location.replace('http://localhost:3000/auth/login')
     }
-  })}
+  })
+  }
 
 const checkEmpty = () => {
   let ok = true;
