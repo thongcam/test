@@ -13,7 +13,7 @@ const reqInfo = () => {fetch("http://localhost:3000/",{
       $('#login').show();
     } else
     {
-      const data = response.json();
+      $('.placeholder').show();
       original = data;
       data.sort((a, b) => (a.question_id > b.question_id) ? 1 : -1);
       data.reverse().forEach((question,i) => {
@@ -125,6 +125,7 @@ $(".create").click(() => {
     fetch("http://localhost:3000/add-question", {
       method:"post",
       headers: {'Content-Type': 'application/json'},
+      credentials: 'include',
       body: JSON.stringify({
         cau_hoi: $("#cau-hoi").val(),
         cau_tra_loi: $("#cau-tra-loi").val(),
@@ -147,7 +148,8 @@ $(".discard").click(() => {
 $(".delete").click(() => {
   fetch("http://localhost:3000/delete-question/"+currentID,{
     method: 'delete',
-    headers: {'Content-Type':  'application/json'}
+    headers: {'Content-Type':  'application/json'},
+    credentials: 'include',
   }).then(response => response.json()).then(response => {
     clearScr();
     rerender();
@@ -163,6 +165,7 @@ $(".edit").click(() => {
     fetch("http://localhost:3000/edit-question/"+currentID, {
       method:"put",
       headers: {'Content-Type': 'application/json'},
+      credentials: 'include',
       body: JSON.stringify({
         cau_hoi: $("#cau-hoi").val(),
         cau_tra_loi: $("#cau-tra-loi").val(),
